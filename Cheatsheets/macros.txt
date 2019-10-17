@@ -1,0 +1,37 @@
+Multi-line statements in #define macros
+========================================
+
+ - Multi-line statements in #define macros should be enclosed in one of the two ways
+   do { macro statements..}while(0);
+
+   Ex:
+
+   #define SWAP(x, y) \
+  do { \
+    tmp = (x); \
+    (x) = (y); \
+    (y) = tmp; } \
+  while (0)
+
+ - Statement like expressions
+
+ Ex:
+
+ #define FOO(arg) ({         \
+          typeof(arg) lcl; \
+          lcl = bar(arg);  \
+          lcl;             \
+   })
+
+ This way macro can appear safely inside if clauses or other places that expect a single statement or a statement block.
+
+
+Reference links: https://kernelnewbies.org/FAQ/DoWhile0
+
+Tip: In order to see how your macros have expanded, compile your code in gcc using '-E' flag:
+
+     gcc -E <filename.c>
+
+Tip : Print line of failure and function
+
+      #define FAIL() printf("\nfailure in %s() line %d\n", __func__, __LINE__)
