@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+// About : Implement sorting using qsort API in stdlib for integer variables only
+
 int cmpint (const void * a, const void * b);
 
 int main()

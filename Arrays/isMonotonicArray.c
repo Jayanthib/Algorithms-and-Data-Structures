@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//About : Chcek if the array is monotonically increasing or decreasing
+//About : Check if the array is monotonically increasing or decreasing
+// Algorithm : Use two flags isIncreasing & isDecreasing to track the status of element comparison.
+//             If the status of either of the flags change, array is not monotonic.
 
 int main()
 {
