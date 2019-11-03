@@ -15,7 +15,8 @@ bool queue_test_suite(void);
 struct Queue{
   int head;
   int tail;
-  int q_size;
+  int max_size;
+  int curr_size;
   int *buffer;
 };
 
@@ -29,7 +30,8 @@ bool queue_init(int size){
     return 0;
   queue->head = -1;
   queue->tail = -1;
-  queue->q_size = size;
+  queue->max_size = size;
+  queue->curr_size = 0;
   queue->buffer = (int*)malloc(sizeof(int)*size);
   if (queue->buffer == NULL)
     return 0;
@@ -45,7 +47,6 @@ void queue_free(void){
 bool enqueue(int data){
 
   if (isQueuefull()){
-    printf("Queue is full!\n");
     return 0;
   }
 
@@ -57,6 +58,7 @@ bool enqueue(int data){
     queue->tail = queue->tail + 1;
 
     queue->buffer[queue->tail] = data;
+    queue->curr_size = queue->curr_size + 1;
 
    return 1;
 }
@@ -65,7 +67,6 @@ int dequeue(void){
   int val;
 
   if (isQueueempty()){
-      printf("Queue is empty\n");
       return -1;
   }
 
@@ -77,23 +78,34 @@ int dequeue(void){
       queue->tail = -1;
   }
   else
-    queue->head = (queue->head + 1)%(queue->q_size);
+    queue->head = (queue->head + 1)%(queue->max_size);
+
+    queue->curr_size = queue->curr_size-1;
+
 
     return val;
 }
 
 bool isQueuefull(void){
-  if((queue->tail+1)%(queue->q_size) == (queue->head))
+  if((queue->tail+1)%(queue->max_size) == (queue->head)){
+      printf("Queue is full\n");
     return 1;
+  }
   else
     return 0;
 }
 
 bool isQueueempty(void){
-  if(queue->head == -1 && queue->tail == -1)
+  if(queue->head == -1 && queue->tail == -1){
+      printf("Queue is empty\n");
     return 1;
+  }
   else
     return 0;
+}
+
+int getQueuesize(void){
+  return queue->curr_size;
 }
 
 void print_queue(void){
@@ -101,7 +113,6 @@ void print_queue(void){
     int i;
 
     if (isQueueempty()){
-        printf("Queue is empty\n");
         return ;
     }
 
@@ -132,12 +143,15 @@ int main(){
   enqueue(7);
   enqueue(8);
   enqueue(9);
+  printf("Current size : %d, Max size : %d\n",getQueuesize(),queue->max_size);
   print_queue();
   dequeue();
   print_queue();
   dequeue();
   print_queue();
   dequeue();
+  dequeue();
+  printf("Current size : %d, Max size : %d\n",getQueuesize(),queue->max_size);
   queue_free();
 
   // Call test suite
