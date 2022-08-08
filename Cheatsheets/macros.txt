@@ -1,3 +1,12 @@
+
+Pre-processor
+=============
+
+The C Preprocessor is not a part of the compiler, but is a separate step in the compilation process. In simple terms, a C Preprocessor is just a text substitution tool and it instructs the compiler to do required pre-processing before the actual compilation.
+
+https://www.tutorialspoint.com/cprogramming/c_preprocessors.htm
+
+
 Multi-line statements in #define macros
 ========================================
 
@@ -35,3 +44,14 @@ Tip: In order to see how your macros have expanded, compile your code in gcc usi
 Tip : Print line of failure and function
 
       #define FAIL() printf("\nfailure in %s() line %d\n", __func__, __LINE__)
+
+
+Macro Conditionals
+==================
+
+1. # error : The directive ‘#error’ causes the preprocessor to report a fatal error. This is used in combination with macro conditionals.
+
+#ifdef __vax__
+#error "Won't work on VAXen.  See comments at get_last_object."
+#endif
+

@@ -10,6 +10,10 @@ bool queue_test_suite(void);
 
 // About : Implement Queue using array
 //         Queue is FIFO data structure. Data is removed from head and inserted from tail of queue.
+//  Enqueue : Progress tail
+//  Dequeue : Progress Head
+//  
+
 
 // Global data structure for queue.
 struct Queue_list{

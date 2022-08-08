@@ -1,0 +1,49 @@
+About "Const" keyword
+=====================
+
+Const is a type-qulifier that is used when you want to ensure the access to the variable is read-only. 
+
+This way you can protect the variable from any inadvertant writes. This improves the readability and comprehensibility of the code as well as helps prevent some common errors.
+
+Types :
+
+1. Pointer to constant : The contents pointed by the pointer can't change
+
+const int *ptr; 
+int const *ptr; 
+
+2. Constant pointer : The pointer address pointing to the variable is constant.
+
+3. const int *const ptr : 
+
+We cannot change value pointed by the pointer as well as we cannot point the pointer to other variables.
+
+
+
+https://softwareengineering.stackexchange.com/questions/204500/when-and-for-what-purposes-should-the-const-keyword-be-used-in-c-for-variables
+
+const int a;
+int const a;
+const int *a;
+int * const a;
+int const * a const;
+
+The first two mean the same thing, namely a is a const (read-only) integer. The third means a is a pointer to a const integer (that is, the integer isn't modifiable, but the pointer is). The fourth declares a to be a const pointer to an integer (that is, the integer pointed to by a is modifiable, but the pointer is not). The final declaration declares a to be a const pointer to a const integer (that is, neither the integer pointed to by a, nor the pointer itself may be modified). If the candidate correctly answers these questions, I'll be impressed. Incidentally, you might wonder why I put so much emphasis on const, since it is easy to write a correctly functioning program without ever using it. I have several reasons:
+
+
+About "Volatile" keyword:
+==========================
+
+
+* Complier optimizes repeated reads and writes
+* Volatile keyword ensure complier doesn’t optimize the read and write to memory 
+* Downside: Performance penalty to go read and write the value every single time from the memory 
+* Ex: In ISR, which is the producer of volatile variable manipulates the value and every time there is strict enforcement to read the value from memory 
+
+Use Case:
+
+Hardware mapped registers
+Global variables shared between ISR and main tasks
+Multi-threaded programming 
+
+https://electronics.stackexchange.com/questions/409545/using-volatile-in-embedded-c-development/409570#409570
